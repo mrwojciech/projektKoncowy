@@ -1,11 +1,12 @@
 package com.example.springboot.book;
 
+import com.example.springboot.author.Author;
+import com.example.springboot.author.AuthorDao;
+import com.example.springboot.publisher.Publisher;
+import com.example.springboot.publisher.PublisherDao;
 import org.springframework.web.bind.annotation.*;
-import  com.example.springboot.author.Author;
-import  com.example.springboot.author.AuthorDao;
-import  com.example.springboot.publisher.Publisher;
-import  com.example.springboot.publisher.PublisherDao;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,11 +31,17 @@ public class BookController {
                 .collect(Collectors.joining("\n"));
     }
 
-    @GetMapping("/byRating")
-    public String findAllByRating(Integer rating) {
-        return bookDao.findAllByRating(rating).stream()
-                .map(b -> String.format("%d. '%s', rating: %d", b.getId(), b.getTitle(), b.getRating()))
-                .collect(Collectors.joining("\n"));
+    @GetMapping("/byRating/{rating}")
+    @ResponseBody
+    public String findAllByRating(@PathVariable(required = false) Integer rating) {
+        if (rating != null) {
+            return bookDao.findAllByRating(rating).stream()
+                    .map(b -> String.format("%d. '%s', rating: %d", b.getId(), b.getTitle(), b.getRating()))
+                    .collect(Collectors.joining("\n"));
+        } else {
+            return bookDao.findAll().stream().sorted(Comparator.comparingInt(Book::getRating)).collect(Collectors.toList()).toString();
+        }
+
     }
 
     @GetMapping("/withPublisher")

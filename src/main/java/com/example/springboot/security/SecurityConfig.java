@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .antMatchers("/view/book/add", "/view/book/update", "/view/book/delete").hasRole("ADMIN")
                 .antMatchers("/view/author/add", "/view/author/update", "/view/author/delete").hasRole("ADMIN")
                 .antMatchers("/view/publisher/add", "/view/publisher/update", "/view/publisher/delete").hasRole("ADMIN")
-                .antMatchers("/view/book/list").permitAll()
+                .antMatchers("/view/book/list","/books/byRating").permitAll()
                 .antMatchers("favicon.ico").permitAll()
                 .anyRequest().authenticated()
                 .and()

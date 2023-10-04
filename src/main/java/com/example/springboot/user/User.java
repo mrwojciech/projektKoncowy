@@ -1,6 +1,7 @@
 package com.example.springboot.user;
 
 import com.example.springboot.book.Book;
+import com.example.springboot.trainee.Trainee;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -35,6 +36,14 @@ public class User {
     private String role;
     @Column(nullable = false)
     private Boolean active = false;
+
+    @Column(nullable = false)
+    private Boolean isTrainer = false;
+
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Trainee trainee;
+
 
     @ToString.Exclude
     @OneToMany
