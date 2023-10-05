@@ -15,4 +15,7 @@ public interface TraineeRepository extends JpaRepository<Trainee, Long> {
 
     List<Trainee> whosLastNameContainsText(String text);
 
+    @Query("SELECT u FROM User u WHERE u.isTrainer = false")
+    List<Trainee> getAllTrainees();
+
 }
