@@ -2,6 +2,7 @@ package com.example.springboot.user;
 
 import com.example.springboot.book.Book;
 import com.example.springboot.trainee.Trainee;
+import com.example.springboot.trainer.trainee.Trainer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "users")
@@ -43,6 +43,10 @@ public class User {
     @OneToOne(mappedBy = "user")
     @ToString.Exclude
     private Trainee trainee;
+
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Trainer trainer;
 
 
     @ToString.Exclude

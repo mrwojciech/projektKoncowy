@@ -13,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getWithFavoriteBooksByUsername(String username);
 
     List<User> getUsersByIsTrainerFalse();
+
+    List<User> getUsersByIsTrainerTrue();
 }

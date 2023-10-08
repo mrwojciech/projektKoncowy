@@ -35,6 +35,6 @@ public class UserController {
         user.setRole("USER");
         user.setActive(true);
         userRepository.save(user);
-        return "redirect:/view/books/my-list";
+        return "redirect:/view/book/my-list";
     }
 }
