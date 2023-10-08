@@ -54,13 +54,13 @@ public class TraineeViewController {
         }
 
 
-
         if (user.getIsTrainer()) {
-            userRepository.save(user);
+//            userRepository.save(user);
             Trainer trainer = new Trainer();
             trainer.setRating(rating);
             trainer.setUser(user);
             trainerRepository.save(trainer);
+            userRepository.save(user);
         }
 
         if (!user.getIsTrainer()) {

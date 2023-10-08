@@ -29,6 +29,7 @@ public class Trainer {
     private Double rating;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
 //    @NotNull
     private User user;
 

@@ -21,6 +21,7 @@ public class Trainee {
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
 //    @NotNull
     private User user;
 
