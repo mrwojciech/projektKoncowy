@@ -9,13 +9,15 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<form:form method="post" modelAttribute="user">
+<form:form method="post" modelAttribute="trainee">
     First Name: <form:input path="firstName"/><form:errors path="firstName"/><br/>
     Last Name: <form:input path="lastName"/><form:errors path="lastName"/><br/>
     Password: <form:textarea path="password"/><form:errors path="password"/><br/>
-    Role <form:input path="role"/><form:errors path="role"/><br/>
+    Role <form:input path="role" /><form:errors path="role"/><br/>
     UserName <form:input path="username"/><form:errors path="username"/><br/>
+<%--
     Is Trainer <form:checkbox id="isTrainer" path="isTrainer"/><form:errors path="isTrainer"/><br/>
+    <form:hidden path="id"/>
     <div id="ratingSection">
         <p>This is a trainer.</p>
         rating <form:input path="trainer.rating"/><form:errors path="trainer.rating"/><br/>
@@ -23,6 +25,7 @@
     <div id="notRatingSection">
         <p>This is not a trainer.</p>
     </div>
+--%>
 
     <form:button>Dodaj</form:button>
 </form:form>

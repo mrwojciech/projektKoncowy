@@ -1,14 +1,12 @@
 package com.example.springboot.trainer;
 
-import com.example.springboot.user.User;
+import com.example.springboot.trainee.TraineeRepository;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,10 +17,12 @@ public class TrainerViewController {
 
     private final TrainerRepository trainerRepository;
     private final UserRepository userRepository;
+    private final TraineeRepository traineeRepository;
 
-    public TrainerViewController(TrainerRepository trainerRepository, UserRepository userRepository) {
+    public TrainerViewController(TrainerRepository trainerRepository, UserRepository userRepository, TraineeRepository traineeRepository) {
         this.trainerRepository = trainerRepository;
         this.userRepository = userRepository;
+        this.traineeRepository = traineeRepository;
     }
 
 
@@ -34,18 +34,24 @@ public class TrainerViewController {
     }
 
     @GetMapping("/add")
-    public String getAddView(Model model) {
-       log.info("getAddView");
-        model.addAttribute("user", new User());
+    public String getAddView(Model model,
+                             @RequestParam(name = "isTrainer", defaultValue = "false") Boolean isTrainer,
+                             @RequestParam(name = "rating", defaultValue = "0") Integer rating) {
+        log.info("getAddView");
+        model.addAttribute("trainer", new Trainer());
+        model.addAttribute("isTrainer", isTrainer);
+        model.addAttribute("rating", rating);
         return "/trainers/add-view";
     }
 
     @PostMapping("/add")
-    public String addUser(@Valid User user, BindingResult bindingResult, Model model) {
+    public String addUser(@ModelAttribute("trainer") @Valid Trainer trainer, BindingResult bindingResult,
+                          @RequestParam(name = "trainer.rating", required = false) Double trainerrating) {
         if (bindingResult.hasErrors()) {
             return "/trainers/add-view";
         }
-        userRepository.save(user);
+        trainer.setRating(trainer.getRating());
+        trainerRepository.save(trainer);
         return "redirect:/view/trainer/list";
     }
 }

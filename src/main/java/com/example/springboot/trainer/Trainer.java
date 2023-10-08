@@ -1,22 +1,26 @@
 package com.example.springboot.trainer;
 
+import com.example.springboot.trainee.Trainee;
 import com.example.springboot.user.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "trainer")
 @ToString
 @Getter
 @Setter
-public class Trainer {
+public class Trainer extends User{
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,15 +32,8 @@ public class Trainer {
     @Digits(integer = 2, fraction = 1)
     private Double rating;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-//    @NotNull
-    private User user;
+    @ManyToMany()
+    private Set<Trainee> trainees = new HashSet<>();
 
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 }

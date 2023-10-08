@@ -1,5 +1,6 @@
 package com.example.springboot.trainee;
 
+import com.example.springboot.trainer.Trainer;
 import com.example.springboot.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,31 +8,30 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "trainee")
 @ToString
 @Getter
 @Setter
-public class Trainee {
+public class Trainee extends User{
 
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-//    @NotNull
-    private User user;
+    @ManyToMany(mappedBy = "trainees")
+    private Set<Trainer> trainers = new HashSet<>();
 
     public Trainee() {
     }
 
 
-
     public void setId(Long id) {
         this.id = id;
     }
+
 
 }

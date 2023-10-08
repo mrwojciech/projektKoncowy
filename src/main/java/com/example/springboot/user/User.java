@@ -3,20 +3,22 @@ package com.example.springboot.user;
 import com.example.springboot.book.Book;
 import com.example.springboot.trainee.Trainee;
 import com.example.springboot.trainer.Trainer;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -40,16 +42,10 @@ public class User {
     @Column(nullable = false)
     private Boolean isTrainer = false;
 
-    @OneToOne(mappedBy = "user")
-    @ToString.Exclude
-    private Trainee trainee;
-
-    @OneToOne(mappedBy = "user")
-    @ToString.Exclude
-    private Trainer trainer;
-
 
     @ToString.Exclude
     @OneToMany
     private Set<Book> favoriteBooks = new LinkedHashSet<>();
+
+
 }

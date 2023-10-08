@@ -8,6 +8,7 @@ import java.util.List;
 public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
     Trainer getTrainerById(Long id);
+/*
 
     Trainer getTraineeByUser_LastName(String lastName);
 
@@ -16,6 +17,7 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
     List<Trainer> whosLastNameContainsText(String text);
 
     List<Trainer> findAllByUser_IsTrainer(boolean b);
+*/
 
     List<Trainer> findAll();
     /*

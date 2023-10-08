@@ -24,17 +24,20 @@
             <th>Role</th>
             <th>UserName</th>
             <th>Is Trainer</th>
+            <th>Is Active</th>
             <th>User_Id</th>
         </tr>
-        <c:forEach items="${trainees}" var="trainee">
+        <c:forEach items="${allTraineesWithUserIds}" var="allTraineesWithUserId">
             <tr>
-                <td>${trainee.id}</td>
-                <td>${trainee.firstName}</td>
-                <td>${trainee.lastName}</td>
-                <td>${trainee.password}</td>
-                <td>${trainee.role}</td>
-                <td>${trainee.username}</td>
-                <td>${trainee.id}</td>
+                <td>${allTraineesWithUserId[0].id}</td>
+                <td>${allTraineesWithUserId[0].user.firstName}</td>
+                <td>${allTraineesWithUserId[0].user.lastName}</td>
+                <td>${allTraineesWithUserId[0].user.password}</td>
+                <td>${allTraineesWithUserId[0].user.role}</td>
+                <td>${allTraineesWithUserId[0].user.username}</td>
+                <td>${allTraineesWithUserId[0].user.isTrainer}</td>
+                <td>${allTraineesWithUserId[0].user.active}</td>
+                <td>${allTraineesWithUserId[1].id}</td>
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">

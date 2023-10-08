@@ -21,6 +21,6 @@ public class TrainerController {
     @GetMapping("/list")
     @ResponseBody
     public String findAll() {
-        return String.valueOf(trainerRepository.findAllByUser_IsTrainer(true));
+        return String.valueOf(trainerRepository.findAll());
     }
 }

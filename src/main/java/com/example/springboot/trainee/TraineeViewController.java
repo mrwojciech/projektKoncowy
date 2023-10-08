@@ -8,10 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,43 +31,30 @@ public class TraineeViewController {
     @GetMapping("/list")
     public String getListView(Model model) {
         model.addAttribute("users", userRepository.getUsersByIsTrainerFalse());
+        model.addAttribute("trainees", traineeRepository.findAll());
         return "/trainees/list-view";
     }
 
     @GetMapping("/add")
     public String getAddView(Model model,
-                             @RequestParam(name = "isTrainer", defaultValue = "false") Boolean isTrainer) {
+                             @RequestParam(name = "isTrainer", defaultValue = "false") Boolean isTrainer,
+                             @RequestParam(name = "rating", defaultValue = "0") Integer rating
+
+    ) {
         log.info("getAddView");
-        model.addAttribute("user", new User());
+        model.addAttribute("trainee", new Trainee());
         model.addAttribute("isTrainer", isTrainer);
+        model.addAttribute("rating", rating);
         return "/trainees/add-view";
     }
 
     @PostMapping("/add")
-    public String addUser(@Valid User user, BindingResult bindingResult,
-                          @RequestParam(name = "rating", required = false) Double rating, Model model) {
+    public String addUser(@ModelAttribute("trainee") @Valid Trainee trainee, BindingResult bindingResult,
+                          @RequestParam(name = "trainer.rating", required = false) Double trainerrating, Model model) {
         if (bindingResult.hasErrors()) {
             return "/trainees/add-view";
         }
-
-
-        if (user.getIsTrainer()) {
-//            userRepository.save(user);
-            Trainer trainer = new Trainer();
-            trainer.setRating(rating);
-            trainer.setUser(user);
-            trainerRepository.save(trainer);
-            userRepository.save(user);
-        }
-
-        if (!user.getIsTrainer()) {
-            userRepository.save(user);
-            Trainee trainee = new Trainee();
-            trainee.setUser(user);
             traineeRepository.save(trainee);
-        }
-
-//        userRepository.save(user);
 
         return "redirect:/view/trainee/list";
     }

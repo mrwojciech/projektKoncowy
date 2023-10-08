@@ -11,11 +11,11 @@ public class TraineeController {
     public TraineeController(TraineeRepository traineeRepository) {
         this.traineeRepository = traineeRepository;
     }
-
+/*
     @GetMapping("/{id}")
     @ResponseBody
     public String getUserById(@PathVariable(name = "id") Long id) {
-        return String.valueOf(traineeRepository.getTraineeById(id));
-    }
+        return String.valueOf(traineeRepository.findByU(id));
+    }*/
 
 }

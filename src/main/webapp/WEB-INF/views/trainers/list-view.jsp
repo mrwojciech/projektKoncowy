@@ -16,30 +16,37 @@
 
 <td>
     <sec:authorize access="hasRole('ADMIN')">
-        <a href="/view/trainee/add">Dodaj Usera</a><br/>
+        <div>
+            <a href="/view/trainee/add">Dodaj użytkownika</a><br/>
+        </div>
+        <div>
+            <a href='<c:url value="/view/trainer/add"/>'>Dodaj trenera</a>
+        </div>
     </sec:authorize>
 </td>
 
 <div>
     <table>
         <tr>
-            <th>Id</th>
+            <th>Trainer Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Rating</th>
             <th>UserName</th>
             <th>Is Trainer</th>
+            <th> User id</th>
             <th>Links</th>
         </tr>
-        <c:forEach items="${users}" var="user">
+        <c:forEach items="${trainers}" var="trainer">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
+                <td>${trainer.id}</td>
+                <td>${trainer.firstName}</td>
+                <td>${trainer.lastName}</td>
 
                 <td>${trainer.rating}</td>
-                <td>${user.username}</td>
-                <td>${user.isTrainer}</td>
+                <td>${trainer.username}</td>
+<%--                <td>${trainer.isTrainer}</td>--%>
+                <td>${trainer.id}</td>
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">
