@@ -2,7 +2,7 @@ package com.example.springboot.user;
 
 import com.example.springboot.book.Book;
 import com.example.springboot.trainee.Trainee;
-import com.example.springboot.trainer.trainee.Trainer;
+import com.example.springboot.trainer.Trainer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

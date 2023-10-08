@@ -1,4 +1,4 @@
-package com.example.springboot.trainer.trainee;
+package com.example.springboot.trainer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

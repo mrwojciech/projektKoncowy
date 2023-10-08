@@ -1,4 +1,4 @@
-package com.example.springboot.trainer.trainee;
+package com.example.springboot.trainer;
 
 import com.example.springboot.user.User;
 import lombok.Getter;

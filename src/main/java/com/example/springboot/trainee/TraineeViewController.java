@@ -1,7 +1,7 @@
 package com.example.springboot.trainee;
 
-import com.example.springboot.trainer.trainee.Trainer;
-import com.example.springboot.trainer.trainee.TrainerRepository;
+import com.example.springboot.trainer.Trainer;
+import com.example.springboot.trainer.TrainerRepository;
 import com.example.springboot.user.User;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
