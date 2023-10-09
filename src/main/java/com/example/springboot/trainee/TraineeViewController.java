@@ -1,8 +1,6 @@
 package com.example.springboot.trainee;
 
-import com.example.springboot.trainer.Trainer;
 import com.example.springboot.trainer.TrainerRepository;
-import com.example.springboot.user.User;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -54,8 +52,9 @@ public class TraineeViewController {
         if (bindingResult.hasErrors()) {
             return "/trainees/add-view";
         }
-            traineeRepository.save(trainee);
-
+        traineeRepository.save(trainee);
         return "redirect:/view/trainee/list";
     }
+
+
 }

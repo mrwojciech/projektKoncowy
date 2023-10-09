@@ -20,6 +20,7 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 */
 
     List<Trainer> findAll();
+
     /*
     @Query("SELECT u FROM User u WHERE u.isTrainer = false")
     List<Trainer> getAllTr();

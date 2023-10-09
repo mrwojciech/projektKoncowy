@@ -42,7 +42,6 @@
                 <td>${trainer.id}</td>
                 <td>${trainer.firstName}</td>
                 <td>${trainer.lastName}</td>
-
                 <td>${trainer.rating}</td>
                 <td>${trainer.username}</td>
 <%--                <td>${trainer.isTrainer}</td>--%>
@@ -50,12 +49,12 @@
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">
-                            <a href="/view/trainee/update?id=${id}">Edytuj</a><br/>
-                            <a href="/view/trainee/delete?id=${id}">Usuń</a><br/>
+                            <a href="/view/trainer/update?trainerId=${trainer.id}">Edytuj</a><br/>
+                            <a href="/view/trainer/delete?id=${id}">Usuń</a><br/>
                         </sec:authorize>
-                        <a href="/view/trainee/addToFavorite?id=${id}">Dodaj do ulubionych</a>
-                        <a href="/view/trainee/addToFavorite?id=${id}">Obserwuj</a>
-                        <a href="/view/trainee/addToFavorite?id=${id}">Umów się na trening</a>
+<%--                        <input type="hidden" name="traineeId" value="${trainee.id}"/>--%>
+                        <a href="/view/training/add?trainerId=${trainer.id}&userId=${userId}">Zapisz sie na trening</a>
+                        <a href="/view/trainer/addToFavorite?id=${id}">Obserwuj</a>
                     </sec:authorize>
                 </td>
             </tr>

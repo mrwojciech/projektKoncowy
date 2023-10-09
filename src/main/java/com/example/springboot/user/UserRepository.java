@@ -8,6 +8,8 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User getByUsername(String username);
+    User getUserById(Long id);
+
 
     @EntityGraph(type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"favoriteBooks"})
     User getWithFavoriteBooksByUsername(String username);

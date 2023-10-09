@@ -30,4 +30,6 @@ public class AuthService implements UserDetailsService {
                 user.getPassword(), user.getActive(), true, true, true,
                 Set.of(new SimpleGrantedAuthority(user.getRole())));
     }
+
+
 }

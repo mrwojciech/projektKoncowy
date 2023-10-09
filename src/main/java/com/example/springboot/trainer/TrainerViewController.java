@@ -1,8 +1,12 @@
 package com.example.springboot.trainer;
 
 import com.example.springboot.trainee.TraineeRepository;
+import com.example.springboot.user.User;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +32,15 @@ public class TrainerViewController {
 
     @GetMapping("/list")
     public String getListView(Model model) {
-        model.addAttribute("users", userRepository.getUsersByIsTrainerTrue());
         model.addAttribute("trainers", trainerRepository.findAll());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User byUsername = userRepository.getByUsername(userDetails.getUsername());
+            Long id = byUsername.getId();
+            model.addAttribute("userId", id);
+        }
         return "/trainers/list-view";
     }
 
@@ -41,6 +52,7 @@ public class TrainerViewController {
         model.addAttribute("trainer", new Trainer());
         model.addAttribute("isTrainer", isTrainer);
         model.addAttribute("rating", rating);
+    //    model.addAttribute("trainee.id", id);
         return "/trainers/add-view";
     }
 
