@@ -6,56 +6,17 @@
 <html>
 <head>
     <title>Dodaj Trenera</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <form:form method="post" modelAttribute="trainer">
     First Name: <form:input path="firstName"/><form:errors path="firstName"/><br/>
     Last Name: <form:input path="lastName"/><form:errors path="lastName"/><br/>
     Password: <form:textarea path="password"/><form:errors path="password"/><br/>
-    Role <form:input path="role" /><form:errors path="role"/><br/>
     UserName <form:input path="username"/><form:errors path="username"/><br/>
-    Is Trainer <form:checkbox id="isTrainer" path="isTrainer"/><form:errors path="isTrainer"/><br/>
-    <form:hidden path="id"/>
-    <div id="ratingSection">
-        <p>This is a trainer.</p>
-        rating <form:input path="rating"/><form:errors path="rating"/><br/>
-    </div>
-    <div id="notRatingSection">
-        <p>This is not a trainer.</p>
-    </div>
-
+    rating <form:input path="rating"/><form:errors path="rating"/><br/>
     <form:button>Dodaj</form:button>
 </form:form>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function handleCheckboxChange() {
-            var isTrainerCheckbox = document.getElementById('isTrainer');
-            var ratingSection = document.getElementById('ratingSection');
-            var notRatingSection = document.getElementById('notRatingSection');
-
-            if (isTrainerCheckbox.checked) {
-                ratingSection.style.display = 'block';
-                notRatingSection.style.display = 'none';
-            } else {
-                ratingSection.style.display = 'none';
-                notRatingSection.style.display = 'block';
-            }
-
-            isTrainerCheckbox.addEventListener('change', function () {
-                if (isTrainerCheckbox.checked) {
-                    ratingSection.style.display = 'block';
-                    notRatingSection.style.display = 'none';
-                } else {
-                    ratingSection.style.display = 'none';
-                    notRatingSection.style.display = 'block';
-                }
-            });
-        }
-
-        handleCheckboxChange();
-    });
-</script>
 
 
 </body>

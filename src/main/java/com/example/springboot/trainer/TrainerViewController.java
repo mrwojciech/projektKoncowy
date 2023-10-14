@@ -52,17 +52,17 @@ public class TrainerViewController {
         model.addAttribute("trainer", new Trainer());
         model.addAttribute("isTrainer", isTrainer);
         model.addAttribute("rating", rating);
-    //    model.addAttribute("trainee.id", id);
+        //    model.addAttribute("trainee.id", id);
         return "/trainers/add-view";
     }
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute("trainer") @Valid Trainer trainer, BindingResult bindingResult,
-                          @RequestParam(name = "trainer.rating", required = false) Double trainerrating) {
+    public String addUser(@ModelAttribute("trainer") @Valid Trainer trainer, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/trainers/add-view";
         }
-        trainer.setRating(trainer.getRating());
+        //      trainer.setRating(trainer.getRating());
+        trainer.setRole("USER");
         trainerRepository.save(trainer);
         return "redirect:/view/trainer/list";
     }

@@ -5,13 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Trainees</title>
+    <title>Trainers</title>
 </head>
 <body>
-<%--<div>--%>
-<%--    <a href='<c:url value="/view/trainer/add"/>'>Dodaj trenera</a>--%>
-<%--</div>--%>
-
+<jsp:include page="/WEB-INF/views/logout-link.jsp"/>
 <p>Nasi Trenerzy</p>
 
 <td>

@@ -11,6 +11,7 @@
 <div>
     <a href="/view/trainee/add">Dodaj użytkownika</a><br/>
 </div>
+<jsp:include page="/WEB-INF/views/logout-link.jsp"/>
 <div>
     <a href='<c:url value="/view/trainer/add"/>'>Dodaj trenera</a>
 </div>

@@ -3,6 +3,7 @@ package com.example.springboot.trainee;
 import com.example.springboot.trainer.TrainerRepository;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,13 @@ public class TraineeViewController {
     private final TraineeRepository traineeRepository;
     private final TrainerRepository trainerRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public TraineeViewController(TraineeRepository traineeRepository, TrainerRepository trainerRepository, UserRepository userRepository) {
+    public TraineeViewController(TraineeRepository traineeRepository, TrainerRepository trainerRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.traineeRepository = traineeRepository;
         this.trainerRepository = trainerRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -47,11 +50,13 @@ public class TraineeViewController {
     }
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute("trainee") @Valid Trainee trainee, BindingResult bindingResult,
-                          @RequestParam(name = "trainer.rating", required = false) Double trainerrating, Model model) {
+    public String addUser(@ModelAttribute("trainee") @Valid Trainee trainee, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/trainees/add-view";
         }
+        trainee.setPassword(passwordEncoder.encode(trainee.getPassword()));
+        trainee.setRole("USER");
+        trainee.setActive(true);
         traineeRepository.save(trainee);
         return "redirect:/view/trainee/list";
     }

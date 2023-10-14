@@ -10,6 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getByUsername(String username);
     User getUserById(Long id);
 
+    List<User> findAll();
 
     @EntityGraph(type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"favoriteBooks"})
     User getWithFavoriteBooksByUsername(String username);

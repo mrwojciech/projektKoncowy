@@ -9,7 +9,7 @@
 </head>
 <body>
 Witaj ${user.firstName} ${user.lastName}, poniżej znajduje się lista Twoich treningow
-
+<jsp:include page="/WEB-INF/views/logout-link.jsp"/>
 <table>
     <tr>
         <th>Id</th>

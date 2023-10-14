@@ -21,9 +21,11 @@ public class Trainee extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+/*
 
     @ManyToMany(mappedBy = "trainees")
     private Set<Trainer> trainers = new HashSet<>();
+*/
 
     public Trainee() {
     }

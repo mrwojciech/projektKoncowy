@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/view/user")
 public class UserController {
@@ -18,6 +20,12 @@ public class UserController {
     public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/list")
+    public String listUsers(Model model) {
+        List<User> all = userRepository.findAll();
+        return all.toString();
     }
 
     @GetMapping("/add")

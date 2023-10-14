@@ -31,9 +31,11 @@ public class Trainer extends User{
     @DecimalMax(value = "10.0", inclusive = true)
     @Digits(integer = 2, fraction = 1)
     private Double rating;
+/*
 
     @ManyToMany()
     private Set<Trainee> trainees = new HashSet<>();
+*/
 
 
 }
