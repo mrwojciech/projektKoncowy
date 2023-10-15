@@ -1,8 +1,12 @@
 package com.example.springboot.trainee;
 
 import com.example.springboot.trainer.TrainerRepository;
+import com.example.springboot.user.User;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +63,21 @@ public class TraineeViewController {
         trainee.setActive(true);
         traineeRepository.save(trainee);
         return "redirect:/view/trainee/list";
+    }
+
+    @GetMapping("/traineeLandingPage")
+    public String traineeLandingPage(Model model) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User byUsername = userRepository.getByUsername(userDetails.getUsername());
+            Long id = byUsername.getId();
+//            traineeRepository.findTraineeById(id);
+            model.addAttribute("trainee", traineeRepository.getTraineeById(id));
+        }
+        return "/trainees/trainee-landingPage";
     }
 
 

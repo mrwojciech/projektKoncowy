@@ -51,6 +51,7 @@
                         </sec:authorize>
 <%--                        <input type="hidden" name="traineeId" value="${trainee.id}"/>--%>
                         <a href="/view/training/add?trainerId=${trainer.id}&userId=${userId}">Zapisz sie na trening</a>
+                        <a href="/view/trainer/${trainer.id}/schedule">Pokaż dostępność trenera</a>
                         <a href="/view/trainer/addToFavorite?id=${id}">Obserwuj</a>
                     </sec:authorize>
                 </td>

@@ -1,6 +1,5 @@
 package com.example.springboot.training;
 
-import com.example.springboot.trainee.Trainee;
 import com.example.springboot.trainer.Trainer;
 import com.example.springboot.user.User;
 import lombok.Getter;
@@ -28,6 +27,7 @@ public class Training {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime dateTime;
 
     private String description;

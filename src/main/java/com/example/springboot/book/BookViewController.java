@@ -102,7 +102,7 @@ public class BookViewController {
     public String getMyListView(@AuthenticationPrincipal UserDetails authenticatedUser, Model model) {
         User user = userRepository.getWithFavoriteBooksByUsername(authenticatedUser.getUsername());
         model.addAttribute("user", user);
-        model.addAttribute("myBooks", user.getFavoriteBooks());
+//        model.addAttribute("myBooks", user.getFavoriteBooks());
         return "/books/my-list-view";
     }
 
@@ -110,7 +110,7 @@ public class BookViewController {
     public String addToFavorite(@RequestParam Long id, @AuthenticationPrincipal UserDetails authenticatedUser) {
         Book book = bookRepository.findById(id).get();
         User user = userRepository.getWithFavoriteBooksByUsername(authenticatedUser.getUsername());
-        user.getFavoriteBooks().add(book);
+//        user.getFavoriteBooks().add(book);
         userRepository.save(user);
         return "redirect:/view/book/list";
     }
@@ -118,7 +118,7 @@ public class BookViewController {
     @GetMapping("/removeFromFavorite")
     public String removeFromFavorite(@RequestParam Long id, @AuthenticationPrincipal UserDetails authenticatedUser) {
         User user = userRepository.getWithFavoriteBooksByUsername(authenticatedUser.getUsername());
-        user.getFavoriteBooks().removeIf(book -> book.getId().equals(id));
+//        user.getFavoriteBooks().removeIf(book -> book.getId().equals(id));
         userRepository.save(user);
         return "redirect:/view/book/my-list";
     }

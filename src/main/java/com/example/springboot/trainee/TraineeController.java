@@ -22,10 +22,5 @@ public class TraineeController {
         public String getUserById(@PathVariable(name = "id") Long id) {
             return String.valueOf(traineeRepository.findByU(id));
         }*/
-    @GetMapping("/traineeLandingPage")
-    @ResponseBody
-    public String traineeLandingPage(Model model) {
-        return "/trainee/my-trainings";
-    }
 
 }

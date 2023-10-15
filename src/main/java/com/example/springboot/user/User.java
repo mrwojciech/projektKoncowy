@@ -43,9 +43,5 @@ public class User {
     private Boolean isTrainer = false;
 
 
-    @ToString.Exclude
-    @OneToMany
-    private Set<Book> favoriteBooks = new LinkedHashSet<>();
-
 
 }

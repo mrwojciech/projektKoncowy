@@ -26,6 +26,7 @@ public class Trainee extends User{
     @ManyToMany(mappedBy = "trainees")
     private Set<Trainer> trainers = new HashSet<>();
 */
+    private Integer trainingActivity;
 
     public Trainee() {
     }

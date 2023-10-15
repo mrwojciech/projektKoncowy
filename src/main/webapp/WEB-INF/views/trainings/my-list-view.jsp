@@ -8,24 +8,41 @@
     <title>Moje treningi</title>
 </head>
 <body>
-Witaj ${user.firstName} ${user.lastName}, poniżej znajduje się lista Twoich treningow
+<%-- Welcome message based on user's name --%>
+<%--
+<div>
+    Witaj <%= user.getFirstName() %> <%= user.getLastName() %>, poniżej znajduje się lista Twoich treningów.
+</div>
+--%>
+
+
 <jsp:include page="/WEB-INF/views/logout-link.jsp"/>
+
 <table>
     <tr>
         <th>Id</th>
-        <th>Title</th>
-        <th>Rating</th>
+        <th>Trainer: Id</th>
+        <th>rating</th>
+        <th> username</th>
+        <th> firstName</th>
+        <th> lastName</th>
+        <th> active</th>
+        <th>Date and Time</th>
         <th>Description</th>
-        <th>Publisher</th>
-        <th>Authors</th>
         <th>Actions</th>
     </tr>
-    <c:forEach items="${myTrainings}" var="training">
+    <c:forEach items="${trainings}" var="training">
         <tr>
             <td>${training.id}</td>
-            <td>${training.trainer}</td>
+            <td>${training.trainer.id}</td>
+            <td>${training.trainer.rating}</td>
+            <td>${training.trainer.username}</td>
+            <td>${training.trainer.firstName}</td>
+            <td>${training.trainer.lastName}</td>
+            <td>${training.trainer.active}</td>
             <td>${training.dateTime}</td>
             <td>${training.description}</td>
+            <td>actions</td>
             <td>
                 <sec:authorize access="isAuthenticated()">
                     <a href="/view/training/update?id=${training.id}">Edytuj</a>

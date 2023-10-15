@@ -5,7 +5,10 @@ import com.example.springboot.trainer.TrainerRepository;
 import com.example.springboot.user.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 
 @Log4j2
@@ -25,10 +28,10 @@ public class TrainingViewController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/trainee/{id}")
-    @ResponseBody
-    public String getAllTrainingsForTrainee(@RequestParam(name = "id") Long id) {
-        return String.valueOf(trainingRepository.getAllByUser_Id(id));
+    @GetMapping("/{id}")
+    public String getAllTrainingsForTrainee(@PathVariable(name = "id") Long id, Model model) {
+        model.addAttribute("trainings",trainingRepository.getAllByUser_Id(id));
+        return "/trainings/my-list-view";
     }
 
     @GetMapping("/trainer/{id}")
@@ -44,6 +47,8 @@ public class TrainingViewController {
         Training training = new Training();
         training.setTrainer(trainerRepository.getTrainerById(trainerId));
         training.setUser(userRepository.getUserById(userId));
+        training.setDateTime(LocalDateTime.now());
+        training.setDescription("pierwszy trening");
         trainingRepository.save(training);
         return "trainingAdded";
     }

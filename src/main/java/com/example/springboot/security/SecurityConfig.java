@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/view/trainer/list")
+                .logoutSuccessUrl("/login")
                 .and()
                 .build();
     }

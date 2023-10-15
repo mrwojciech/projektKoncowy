@@ -37,6 +37,6 @@ public class LandingPageController {
                 return "redirect:/trainer/trainerLandingPage";
             }
         }
-        return "redirect:/trainee/traineeLandingPage";
+        return "redirect:/view/trainee/traineeLandingPage";
     }
 }
