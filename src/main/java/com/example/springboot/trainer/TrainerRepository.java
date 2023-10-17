@@ -1,5 +1,6 @@
 package com.example.springboot.trainer;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,7 +19,7 @@ public interface TrainerRepository extends JpaRepository<Trainer, Long> {
 
     List<Trainer> findAllByUser_IsTrainer(boolean b);
 */
-
+//   @EntityGraph(type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"user"})
     List<Trainer> findAll();
 
     /*

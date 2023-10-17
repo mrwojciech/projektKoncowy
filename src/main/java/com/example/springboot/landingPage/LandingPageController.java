@@ -33,7 +33,7 @@ public class LandingPageController {
             if ("ROLE_ADMIN".equals(auth.getAuthority())) {
                 return "redirect:/admin/adminLandingPage";
             }
-            if (userRepository.getByUsername(userDetails.getUsername()).getIsTrainer()) {
+            if (userRepository.getByUsername(userDetails.getUsername()).getTrainer()) {
                 return "redirect:/trainer/trainerLandingPage";
             }
         }

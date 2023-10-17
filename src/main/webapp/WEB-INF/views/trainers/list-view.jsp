@@ -42,7 +42,7 @@
                 <td>${trainer.rating}</td>
                 <td>${trainer.username}</td>
 <%--                <td>${trainer.isTrainer}</td>--%>
-                <td>${trainer.id}</td>
+                <td>${trainer.user}</td>
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">
@@ -50,7 +50,7 @@
                             <a href="/view/trainer/delete?id=${id}">Usuń</a><br/>
                         </sec:authorize>
 <%--                        <input type="hidden" name="traineeId" value="${trainee.id}"/>--%>
-                        <a href="/view/training/add?trainerId=${trainer.id}&userId=${userId}">Zapisz sie na trening</a>
+<%--                        <a href="/view/training/add?trainerId=${trainer.id}&userId=${userId}">Zapisz sie na trening</a>--%>
                         <a href="/view/trainer/${trainer.id}/schedule">Pokaż dostępność trenera</a>
                         <a href="/view/trainer/addToFavorite?id=${id}">Obserwuj</a>
                     </sec:authorize>

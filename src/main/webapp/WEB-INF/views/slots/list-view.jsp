@@ -7,6 +7,10 @@
     <title>Available Slots per Trainer</title>
 </head>
 <body>
+<div>
+    <a href="/view/trainer/list">Nasi trenerzy</a><br/>
+</div>
+<jsp:include page="/WEB-INF/views/logout-link.jsp"/>
 <h1>Available Slots</h1>
 <table>
     <tr>

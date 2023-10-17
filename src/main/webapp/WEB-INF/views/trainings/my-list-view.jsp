@@ -8,12 +8,9 @@
     <title>Moje treningi</title>
 </head>
 <body>
-<%-- Welcome message based on user's name --%>
-<%--
 <div>
-    Witaj <%= user.getFirstName() %> <%= user.getLastName() %>, poniżej znajduje się lista Twoich treningów.
+    <a href="/view/trainer/list">Nasi trenerzy</a><br/>
 </div>
---%>
 
 
 <jsp:include page="/WEB-INF/views/logout-link.jsp"/>

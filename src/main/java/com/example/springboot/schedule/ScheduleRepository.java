@@ -6,6 +6,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
 
     Schedule getAllById(Long id);
+    Schedule getScheduleByTrainerId(Long id);
 
     Schedule getScheduleById(Long id);
 

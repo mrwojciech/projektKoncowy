@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -50,11 +51,13 @@ public class TraineeViewController {
         model.addAttribute("trainee", new Trainee());
         model.addAttribute("isTrainer", isTrainer);
         model.addAttribute("rating", rating);
+//        model.addAttribute("user",traineeRepository.getUserIdByTraineeId(tr));
         return "/trainees/add-view";
     }
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute("trainee") @Valid Trainee trainee, BindingResult bindingResult) {
+    public String addUser(@ModelAttribute("trainee") @Valid Trainee trainee, BindingResult bindingResult,
+                          Model model) {
         if (bindingResult.hasErrors()) {
             return "/trainees/add-view";
         }
@@ -62,6 +65,9 @@ public class TraineeViewController {
         trainee.setRole("USER");
         trainee.setActive(true);
         traineeRepository.save(trainee);
+        Long userIdByTraineeId = traineeRepository.getUserIdByTraineeId(trainee.getId());
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users",users);
         return "redirect:/view/trainee/list";
     }
 

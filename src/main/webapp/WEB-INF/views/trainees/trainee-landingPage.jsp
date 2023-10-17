@@ -21,7 +21,6 @@
             <th>Trainee_id</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Password</th>
             <th>Role</th>
             <th>UserName</th>
             <th>Training Activity</th>
@@ -31,7 +30,6 @@
             <td>${trainee.id}</td>
             <td>${trainee.firstName}</td>
             <td>${trainee.lastName}</td>
-            <td>${trainee.password}</td>
             <td>${trainee.role}</td>
             <td>${trainee.username}</td>
             <td>${trainee.trainingActivity}</td>

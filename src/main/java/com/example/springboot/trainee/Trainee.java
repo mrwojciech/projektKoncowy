@@ -13,7 +13,6 @@ import java.util.Set;
 
 @Entity
 @ToString
-@Getter
 @Setter
 public class Trainee extends User{
 
@@ -36,5 +35,15 @@ public class Trainee extends User{
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public Integer getTrainingActivity() {
+        return trainingActivity;
+    }
+
+    public void setTrainingActivity(Integer trainingActivity) {
+        this.trainingActivity = trainingActivity;
+    }
 }

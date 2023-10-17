@@ -44,7 +44,7 @@ public class TrainerViewController {
 
     @GetMapping("/list")
     public String getListView(Model model) {
-        model.addAttribute("trainers", trainerRepository.findAll());
+     /*   model.addAttribute("trainers", trainerRepository.findAll());
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
@@ -52,7 +52,9 @@ public class TrainerViewController {
             User byUsername = userRepository.getByUsername(userDetails.getUsername());
             Long id = byUsername.getId();
             model.addAttribute("userId", id);
-        }
+        }*/
+//        model.addAttribute("users", userRepository.getUsersByIsTrainerTrue());
+        model.addAttribute("trainers", trainerRepository.findAll());
         return "/trainers/list-view";
     }
 
@@ -84,7 +86,7 @@ public class TrainerViewController {
     @GetMapping("/{trainerId}/schedule")
     public String getSchedule(@PathVariable(name = "trainerId") Long trainerId,
                               Model model) {
-        Schedule schedule = scheduleRepository.getAllById(trainerId);
+        Schedule schedule = scheduleRepository.getScheduleByTrainerId(trainerId);
         model.addAttribute("schedule", schedule);
         model.addAttribute("trainerId", trainerId);
         return "/slots/list-view";
@@ -109,6 +111,7 @@ public class TrainerViewController {
         training.setTrainer(trainerRepository.getTrainerById(trainerId));
         training.setUser(userRepository.getUserById(userId));
         Schedule scheduleById = scheduleRepository.getScheduleById(scheduleId);
+
         LocalDateTime localDateTime = scheduleById.getAvailableOneHourSlots().get(slotId);
         training.setDateTime(localDateTime);
         training.setDescription("pierwszy trening");
