@@ -1,22 +1,14 @@
 package com.example.springboot.trainer;
 
-import com.example.springboot.trainee.Trainee;
 import com.example.springboot.user.User;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-public class Trainer extends User{
+public class Trainer extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,5 +55,13 @@ public class Trainer extends User{
                 ", rating=" + rating +
                 ", " + super.toString() +
                 '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

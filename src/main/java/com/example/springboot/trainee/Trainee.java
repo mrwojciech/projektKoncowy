@@ -12,11 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@ToString
-@Setter
 public class Trainee extends User{
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +26,10 @@ public class Trainee extends User{
 
     public Trainee() {
     }
+
+    @OneToOne(fetch = FetchType.EAGER) // Eagerly fetch User data
+    @JoinColumn(name = "id") // or specify the appropriate join column
+    private User user;
 
 
     public void setId(Long id) {
@@ -45,5 +46,22 @@ public class Trainee extends User{
 
     public void setTrainingActivity(Integer trainingActivity) {
         this.trainingActivity = trainingActivity;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Trainee{" +
+                "id=" + id +
+                ", trainingActivity=" + trainingActivity +
+                ", " + super.toString() +
+                '}';
     }
 }

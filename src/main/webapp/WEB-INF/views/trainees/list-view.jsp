@@ -27,16 +27,17 @@
             <th>Is Trainer</th>
             <th>User_Id</th>
         </tr>
-        <c:forEach items="${users}" var="user">
+        <c:forEach items="${trainees}" var="trainee">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.firstName}</td>
-                <td>${user.lastName}</td>
-                <td>${user.password}</td>
-                <td>${user.role}</td>
-                <td>${user.username}</td>
-                <td>${user.isTrainer}</td>
-                <td>${user.id}</td>
+                <td>${trainee.id}</td>
+                <td>${trainee.firstName}</td>
+                <td>${trainee.lastName}</td>
+                <td>${trainee.password}</td>
+                <td>${trainee.role}</td>
+                <td>${trainee.username}</td>
+                <td>${trainee.user.id}</td>
+                <td>${trainee.user.trainer}</td>
+
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">

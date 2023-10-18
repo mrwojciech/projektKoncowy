@@ -38,7 +38,7 @@ public class User {
     private Boolean active = true;
 
     @Column(nullable = false)
-    private Boolean isTrainer = false;
+    private Boolean trainer = false;
 
 
     public Long getId() {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public Boolean getTrainer() {
-        return isTrainer;
+        return trainer;
     }
 
     public void setId(Long id) {
@@ -102,6 +102,6 @@ public class User {
     }
 
     public void setTrainer(Boolean trainer) {
-        isTrainer = trainer;
+        this.trainer = trainer;
     }
 }

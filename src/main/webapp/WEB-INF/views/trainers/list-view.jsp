@@ -42,7 +42,7 @@
                 <td>${trainer.rating}</td>
                 <td>${trainer.username}</td>
 <%--                <td>${trainer.isTrainer}</td>--%>
-                <td>${trainer.user}</td>
+                <td>${trainer.user.id}</td>
                 <td>
                     <sec:authorize access="isAuthenticated()">
                         <sec:authorize access="hasRole('ADMIN')">

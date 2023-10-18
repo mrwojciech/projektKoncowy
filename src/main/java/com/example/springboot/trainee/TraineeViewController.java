@@ -36,7 +36,7 @@ public class TraineeViewController {
 
     @GetMapping("/list")
     public String getListView(Model model) {
-        model.addAttribute("users", userRepository.getUsersByIsTrainerFalse());
+//        model.addAttribute("users", userRepository.getUsersByIsTrainerFalse());
         model.addAttribute("trainees", traineeRepository.findAll());
         return "/trainees/list-view";
     }
@@ -65,9 +65,11 @@ public class TraineeViewController {
         trainee.setRole("USER");
         trainee.setActive(true);
         traineeRepository.save(trainee);
+/*
         Long userIdByTraineeId = traineeRepository.getUserIdByTraineeId(trainee.getId());
         List<User> users = userRepository.findAll();
-        model.addAttribute("users",users);
+*/
+   //     model.addAttribute("trainees",trainee);
         return "redirect:/view/trainee/list";
     }
 

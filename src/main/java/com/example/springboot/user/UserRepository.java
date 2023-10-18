@@ -14,8 +14,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @EntityGraph(type = EntityGraph.EntityGraphType.LOAD, attributePaths = {"favoriteBooks"})
     User getWithFavoriteBooksByUsername(String username);
-
-    List<User> getUsersByIsTrainerFalse();
-
-    List<User> getUsersByIsTrainerTrue();
 }
