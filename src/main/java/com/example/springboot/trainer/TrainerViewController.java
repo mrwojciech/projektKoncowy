@@ -1,5 +1,7 @@
 package com.example.springboot.trainer;
 
+import com.example.springboot.schedule.AvailableSlot;
+import com.example.springboot.schedule.SlotRepository;
 import com.example.springboot.schedule.Schedule;
 import com.example.springboot.schedule.ScheduleRepository;
 import com.example.springboot.trainee.TraineeRepository;
@@ -31,14 +33,16 @@ public class TrainerViewController {
     private final PasswordEncoder passwordEncoder;
     private final ScheduleRepository scheduleRepository;
     private final TrainingRepository trainingRepository;
+    private final SlotRepository slotRepository;
 
-    public TrainerViewController(TrainerRepository trainerRepository, UserRepository userRepository, TraineeRepository traineeRepository, PasswordEncoder passwordEncoder, ScheduleRepository scheduleRepository, TrainingRepository trainingRepository) {
+    public TrainerViewController(TrainerRepository trainerRepository, UserRepository userRepository, TraineeRepository traineeRepository, PasswordEncoder passwordEncoder, ScheduleRepository scheduleRepository, TrainingRepository trainingRepository, SlotRepository slotRepository) {
         this.trainerRepository = trainerRepository;
         this.userRepository = userRepository;
         this.traineeRepository = traineeRepository;
         this.passwordEncoder = passwordEncoder;
         this.scheduleRepository = scheduleRepository;
         this.trainingRepository = trainingRepository;
+        this.slotRepository = slotRepository;
     }
 
 
@@ -112,12 +116,14 @@ public class TrainerViewController {
         training.setUser(userRepository.getUserById(userId));
         Schedule scheduleById = scheduleRepository.getScheduleById(scheduleId);
 
-        LocalDateTime localDateTime = scheduleById.getAvailableOneHourSlots().get(slotId);
-        training.setDateTime(localDateTime);
+        AvailableSlot availableSlot = scheduleById.getAvailableSlots().get(slotId - 1);
+        training.setDateTime(availableSlot.getAvailableSlot());
         training.setDescription("pierwszy trening");
         trainingRepository.save(training);
-        scheduleRepository.getScheduleById(scheduleId).getAvailableOneHourSlots().remove(slotId);
-
+//        scheduleRepository.removeSlotByScheduleId(scheduleId, slotId);
+//        scheduleRepository.deleteScheduleByIdAndAvailableOneHourSlotsAndId(scheduleId, slotId);
+        //scheduleRepository.getScheduleById(scheduleId).getAvailableOneHourSlots().remove(slotId-1);
+        slotRepository.deleteById(Long.valueOf(slotId));
         return "redirect:/view/training/" + userId;
     }
 }

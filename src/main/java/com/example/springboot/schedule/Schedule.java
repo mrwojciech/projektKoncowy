@@ -23,10 +23,8 @@ public class Schedule {
     @Column(name = "trainer_id")
     private Long trainerId;
 
-
-    @CollectionTable(name = "schedule_available_slots", joinColumns = @JoinColumn(name = "schedule_id"))
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "available_slots")
-    private List<LocalDateTime> availableOneHourSlots;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "schedule_id")
+    private List<AvailableSlot> availableSlots;
 
 }

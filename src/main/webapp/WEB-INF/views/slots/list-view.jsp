@@ -14,17 +14,19 @@
 <h1>Available Slots</h1>
 <table>
     <tr>
+        <th>ID</th>
         <th>Slot ID</th>
         <th>Date</th>
-        <th>Time</th>
-        <th>Actions</th>
+<%--        <th>Time</th>--%>
+        <th>Book this time</th>
     </tr>
-    <c:forEach items="${schedule.availableOneHourSlots}" var="slot" varStatus="loop">
+    <c:forEach items="${schedule.availableSlots}" var="slot" varStatus="loop">
         <tr>
             <td>${loop.index + 1}</td>
-            <td>${slot.toLocalDate()}</td> <!-- Extract date component -->
+            <td>${slot.id}</td>
+            <td>${slot.availableSlot.toLocalDate()}</td>
             <td>
-                <a href="/view/trainer/bookSlot/${schedule.id}/${trainerId}/${loop.index + 1}">${slot.toLocalTime()}</a> <!-- Extract time component and create a link -->
+                <a href="/view/trainer/bookSlot/${schedule.id}/${trainerId}/${slot.id}">${slot.availableSlot.toLocalTime()}</a>
             </td>
         </tr>
     </c:forEach>
