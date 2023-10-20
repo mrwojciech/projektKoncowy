@@ -34,7 +34,7 @@ public class LandingPageController {
                 return "redirect:/admin/adminLandingPage";
             }
             if (userRepository.getByUsername(userDetails.getUsername()).getTrainer()) {
-                return "redirect:/trainer/trainerLandingPage";
+                return "redirect:/view/trainer/trainerLandingPage";
             }
         }
         return "redirect:/view/trainee/traineeLandingPage";

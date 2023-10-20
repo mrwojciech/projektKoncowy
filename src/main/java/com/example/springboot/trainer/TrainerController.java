@@ -1,19 +1,23 @@
 package com.example.springboot.trainer;
 
 import com.example.springboot.user.User;
+import com.example.springboot.user.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/trainer")
 public class TrainerController {
 
     private final TrainerRepository trainerRepository;
+    private final UserRepository userRepository;
 
-    public TrainerController(TrainerRepository trainerRepository) {
+    public TrainerController(TrainerRepository trainerRepository, UserRepository userRepository) {
         this.trainerRepository = trainerRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/{id}")
@@ -28,11 +32,6 @@ public class TrainerController {
         return String.valueOf(trainerRepository.findAll());
     }
 
-    @GetMapping("/trainerLandingPage")
-    @ResponseBody
-    public String trainerLandingPage(Model model) {
-        return "/trainer/my-trainings";
-    }
 
 
 }

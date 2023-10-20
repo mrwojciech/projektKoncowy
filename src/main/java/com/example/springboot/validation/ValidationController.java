@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import  com.example.springboot.book.Book;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.awt.print.Book;
 import java.util.Set;
 
 @Controller
@@ -22,6 +22,7 @@ public class ValidationController {
     @GetMapping("/validate")
     @ResponseBody
     public String validate() {
+/*
         Book invalidBook = new Book();
         invalidBook.setTitle("Abc");
         invalidBook.setRating(-5);
@@ -38,11 +39,13 @@ public class ValidationController {
                 System.out.println("Dla pola " + invalidField + " niepoprawna wartość " + invalidValue + " : " + validationMessage);
             }
         }
+*/
         return "ok";
     }
 
     @GetMapping("/view-validate")
     public String validateWithView(Model model) {
+/*
         Book invalidBook = new Book();
         invalidBook.setTitle("Abc");
         invalidBook.setRating(-5);
@@ -53,6 +56,7 @@ public class ValidationController {
         Set<ConstraintViolation<Book>> violations = validator.validate(invalidBook);
         model.addAttribute("book", invalidBook);
         model.addAttribute("violations", violations);
+*/
         return "/violation-view";
     }
 }

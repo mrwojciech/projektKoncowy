@@ -1,15 +1,11 @@
 package com.example.springboot.user;
 
-import com.example.springboot.book.Book;
-import com.example.springboot.trainee.Trainee;
-import com.example.springboot.trainer.Trainer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")

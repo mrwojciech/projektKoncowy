@@ -8,35 +8,40 @@
     <title>Trainees</title>
 </head>
 <body>
-<div>
-    <a href="/view/trainee/add">Dodaj użytkownika</a><br/>
-</div>
 <jsp:include page="/WEB-INF/views/logout-link.jsp"/>
 <div>
     <a href='<c:url value="/view/trainer/add"/>'>Dodaj trenera</a>
 </div>
+<div>
+    <a href='<c:url value="/view/trainee/add"/>'>Dodaj trainee</a>
+</div>
+
 <div>
     <table>
         <tr>
             <th>Treinee_id</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Password</th>
-            <th>Role</th>
-            <th>UserName</th>
-            <th>Is Trainer</th>
-            <th>User_Id</th>
+            <sec:authorize access="hasRole('ADMIN')">
+                <th>Password</th>
+                <th>Role</th>
+                <th>UserName</th>
+                <th>User_Id</th>
+                <th>Is Trainer</th>
+            </sec:authorize>
         </tr>
         <c:forEach items="${trainees}" var="trainee">
             <tr>
                 <td>${trainee.id}</td>
                 <td>${trainee.firstName}</td>
                 <td>${trainee.lastName}</td>
-                <td>${trainee.password}</td>
-                <td>${trainee.role}</td>
-                <td>${trainee.username}</td>
-                <td>${trainee.user.id}</td>
-                <td>${trainee.user.trainer}</td>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <td>${trainee.password}</td>
+                    <td>${trainee.role}</td>
+                    <td>${trainee.username}</td>
+                    <td>${trainee.user.id}</td>
+                    <td>${trainee.user.trainer}</td>
+                </sec:authorize>
 
                 <td>
                     <sec:authorize access="isAuthenticated()">

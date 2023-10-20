@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Log4j2
@@ -30,16 +31,17 @@ public class TrainingViewController {
 
     @GetMapping("/{id}")
     public String getAllTrainingsForTrainee(@PathVariable(name = "id") Long id, Model model) {
-        model.addAttribute("trainings",trainingRepository.getAllByUser_Id(id));
-        return "/trainings/my-list-view";
+        model.addAttribute("trainings", trainingRepository.getAllByUser_Id(id));
+        return "/trainings/trainee-view";
     }
 
     @GetMapping("/trainer/{id}")
-    @ResponseBody
-    public String getAllTrainingsForTrainer(@RequestParam(name = "id") Long id) {
-        return String.valueOf(trainingRepository.getAllByTrainerId(id));
+    public String getAllTrainingsForTrainer(@PathVariable(name = "id") Long id,
+                                            Model model) {
+        List<Training> allByTrainerId = trainingRepository.getAllByTrainerId(id);
+        model.addAttribute("trainings", allByTrainerId);
+        return "/trainings/trainer-view";
     }
-
 
 
     @GetMapping("/add")

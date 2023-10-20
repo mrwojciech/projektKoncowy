@@ -15,6 +15,8 @@
     <a href="/view/trainer/list">Nasi trenerzy</a><br/>
 </div>
 <jsp:include page="/WEB-INF/views/logout-link.jsp"/>
+<p>Witaj...</p>
+
 <div>
     <table>
         <tr>

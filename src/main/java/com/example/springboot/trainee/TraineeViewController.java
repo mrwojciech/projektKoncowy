@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Log4j2
 @Controller
@@ -69,12 +68,13 @@ public class TraineeViewController {
         Long userIdByTraineeId = traineeRepository.getUserIdByTraineeId(trainee.getId());
         List<User> users = userRepository.findAll();
 */
-   //     model.addAttribute("trainees",trainee);
+        //     model.addAttribute("trainees",trainee);
         return "redirect:/view/trainee/list";
     }
 
     @GetMapping("/traineeLandingPage")
     public String traineeLandingPage(Model model) {
+
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -83,7 +83,7 @@ public class TraineeViewController {
             User byUsername = userRepository.getByUsername(userDetails.getUsername());
             Long id = byUsername.getId();
 //            traineeRepository.findTraineeById(id);
-            model.addAttribute("trainees", traineeRepository.getTraineeById(id));
+            model.addAttribute("trainee", traineeRepository.getTraineeById(id));
         }
         return "/trainees/trainee-landingPage";
     }

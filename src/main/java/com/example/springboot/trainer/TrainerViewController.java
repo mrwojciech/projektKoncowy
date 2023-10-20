@@ -157,4 +157,12 @@ public class TrainerViewController {
         slotRepository.deleteById(Long.valueOf(slotId));
         return "redirect:/view/training/" + userId;
     }
+
+
+    @GetMapping("/trainerLandingPage")
+    public String trainerLandingPage(Model model) {
+        model.addAttribute("trainings",trainingRepository.getAllByTrainerId(getUserId()));
+        return "/trainers/trainer-landingPage";
+    }
+
 }

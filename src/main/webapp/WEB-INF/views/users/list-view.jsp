@@ -20,9 +20,6 @@
 <td>
     <sec:authorize access="hasRole('ADMIN')">
         <div>
-            <a href="/view/trainee/add">Dodaj użytkownika</a><br/>
-        </div>
-        <div>
             <a href='<c:url value="/view/trainer/add"/>'>Dodaj trenera</a>
         </div>
         <div>
