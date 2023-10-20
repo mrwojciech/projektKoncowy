@@ -8,6 +8,7 @@
     <title>Moje treningi</title>
 </head>
 <body>
+<h1>Moje treniengi...</h1>
 <div>
     <a href="/view/trainer/list">Nasi trenerzy</a><br/>
 </div>
@@ -42,7 +43,7 @@
             <td>actions</td>
             <td>
                 <sec:authorize access="isAuthenticated()">
-                    <a href="/view/training/update?id=${training.id}">Edytuj</a>
+                    <a href="/view/trainer/releaseSlot?trainingId=${training.id}">Usuń</a>
                 </sec:authorize>
             </td>
         </tr>

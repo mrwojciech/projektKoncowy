@@ -11,4 +11,6 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     List<Training> getAllByUser_Id(Long id);
 
     List<Training> getAllByTrainerId(Long id);
+
+    Training getTrainingById(Long id);
 }

@@ -1,9 +1,9 @@
 package com.example.springboot.trainer;
 
 import com.example.springboot.schedule.AvailableSlot;
-import com.example.springboot.schedule.SlotRepository;
 import com.example.springboot.schedule.Schedule;
 import com.example.springboot.schedule.ScheduleRepository;
+import com.example.springboot.schedule.SlotRepository;
 import com.example.springboot.trainee.TraineeRepository;
 import com.example.springboot.training.Training;
 import com.example.springboot.training.TrainingRepository;
@@ -20,7 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -48,16 +48,15 @@ public class TrainerViewController {
 
     @GetMapping("/list")
     public String getListView(Model model) {
-     /*   model.addAttribute("trainers", trainerRepository.findAll());
+        model.addAttribute("trainers", trainerRepository.findAll());
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             User byUsername = userRepository.getByUsername(userDetails.getUsername());
             Long id = byUsername.getId();
-            model.addAttribute("userId", id);
-        }*/
-//        model.addAttribute("users", userRepository.getUsersByIsTrainerTrue());
+            model.addAttribute("user", userRepository.getUserById(id));
+        }
         model.addAttribute("trainers", trainerRepository.findAll());
         return "/trainers/list-view";
     }
@@ -83,6 +82,7 @@ public class TrainerViewController {
         trainer.setPassword(passwordEncoder.encode(trainer.getPassword()));
         trainer.setRole("USER");
         trainer.setActive(true);
+        trainer.setTrainer(true);
         trainerRepository.save(trainer);
         return "redirect:/view/trainer/list";
     }
@@ -96,12 +96,33 @@ public class TrainerViewController {
         return "/slots/list-view";
     }
 
-    @RequestMapping("/bookSlot/{scheduleId}/{trainerId}/{slotId}")
-    public String bookSlot(
-            @PathVariable("scheduleId") Long scheduleId,
-            @PathVariable("trainerId") Long trainerId,
-            @PathVariable("slotId") Integer slotId) {
 
+    @GetMapping("/releaseSlot")
+    public String releaseSlot(@RequestParam(name = "trainingId") Long trainingId) {
+
+        Long userId = getUserId();
+
+        Training training = trainingRepository.getTrainingById(trainingId);
+        Long trainerId = training.getTrainer().getId();
+        Long scheduleId = scheduleRepository.findByTrainerId(trainerId).getId();
+
+
+        AvailableSlot releaseSlot = new AvailableSlot();
+        releaseSlot.setAvailableSlot(training.getDateTime());
+        releaseSlot.setId(scheduleId);
+        List<AvailableSlot> availableSlots = scheduleRepository.getScheduleById(scheduleId).getAvailableSlots();
+        availableSlots.add(releaseSlot);
+        Schedule schedule = new Schedule();
+        schedule.setAvailableSlots(availableSlots);
+        schedule.setId(scheduleId);
+        schedule.setTrainerId(trainerId);
+        scheduleRepository.save(schedule);
+
+        trainingRepository.delete(training);
+        return "redirect:/view/training/" + userId;
+    }
+
+    private Long getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Long userId = null;
@@ -110,13 +131,23 @@ public class TrainerViewController {
             User byUsername = userRepository.getByUsername(userDetails.getUsername());
             userId = byUsername.getId();
         }
+        return userId;
+    }
+
+    @GetMapping("/bookSlot/{scheduleId}/{trainerId}/{slotId}")
+    public String bookSlot(
+            @PathVariable("scheduleId") Long scheduleId,
+            @PathVariable("trainerId") Long trainerId,
+            @PathVariable("slotId") Integer slotId) {
+
+        Long userId = getUserId();
 
         Training training = new Training();
         training.setTrainer(trainerRepository.getTrainerById(trainerId));
         training.setUser(userRepository.getUserById(userId));
         Schedule scheduleById = scheduleRepository.getScheduleById(scheduleId);
 
-        AvailableSlot availableSlot = scheduleById.getAvailableSlots().get(slotId - 1);
+        AvailableSlot availableSlot = slotRepository.getAvailableSlotById(Long.valueOf(slotId));
         training.setDateTime(availableSlot.getAvailableSlot());
         training.setDescription("pierwszy trening");
         trainingRepository.save(training);

@@ -21,6 +21,10 @@
         </div>
     </sec:authorize>
 </td>
+<div>
+    <a href="/view/training/${user.id}">Moje treningi</a><br/>
+</div>
+
 
 <div>
     <table>

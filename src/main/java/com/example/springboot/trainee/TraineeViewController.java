@@ -83,7 +83,7 @@ public class TraineeViewController {
             User byUsername = userRepository.getByUsername(userDetails.getUsername());
             Long id = byUsername.getId();
 //            traineeRepository.findTraineeById(id);
-            model.addAttribute("trainee", traineeRepository.getTraineeById(id));
+            model.addAttribute("trainees", traineeRepository.getTraineeById(id));
         }
         return "/trainees/trainee-landingPage";
     }

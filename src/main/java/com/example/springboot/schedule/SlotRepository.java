@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SlotRepository extends JpaRepository<AvailableSlot, Long> {
 
 
+    AvailableSlot getAvailableSlotById(Long id);
 
 }

@@ -40,6 +40,8 @@ public class TrainingViewController {
         return String.valueOf(trainingRepository.getAllByTrainerId(id));
     }
 
+
+
     @GetMapping("/add")
     @ResponseBody
     public String addTraining(@RequestParam(name = "trainerId") Long trainerId,
